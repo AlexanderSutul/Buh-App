@@ -1,22 +1,83 @@
 <div class="card">
-    <div class="card-header bordered">
-        <div class="header-block">
-            <h3 class="title">Изменить категорию</h3>
+        <div class="card-header bordered">
+            <div class="header-block">
+                <h3 class="title">Редактировать катергорию</h3>
+            </div>
+        </div>
+        <div class="card-block">
+            <div class="alert alert-{{message.type}}" *ngIf="message.text">
+                {{message.text}}
+            </div>
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                <div class="form-group">
+                    <label for="e-select-category" class="control-label">Выберите категорию</label>
+                    <select class="form-control" id="e-select-category" 
+                        [(ngModel)]="currentCategoryId"
+                        (change)="onCategoryChange()"
+                        [ngModelOptions]="{standalone: true}"
+                    >
+                        <option 
+                            *ngFor="let c of categories"
+                            [value]="c.id"
+                        >{{c.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group" 
+                    [ngClass]="{'has-error': name.invalid && name.touched, 'has-success': name.valid && name.touched}"
+                >
+                    <label class="control-label" for="e-category-name">Введите название</label>
+                    <input 
+                      type="text" 
+                      id="e-category-name" 
+                      class="form-control"
+                      required
+                      #name="ngModel"
+                      name="name"
+                      [ngModel]="currentCategory.name"
+                    >
+                    <span 
+                      class="form-help-text"
+                      *ngIf="name.invalid && name.touched"
+                    >
+                      Поле не может быть пустое
+                    </span>
+                    <span 
+                      class="form-help-text"
+                      *ngIf="name.valid && name.touched"
+                    >
+                      Все правильно заполнено
+                    </span>
+                </div>
+                <div class="form-group" 
+                  [ngClass]="{'has-error': capacity.invalid && capacity.touched, 'has-success': capacity.valid && capacity.touched}"
+                >
+                    <label class="control-label" for="e-category-value">Введите лимит</label>
+                    <input 
+                      type="number" 
+                      min="1"
+                      id="e-category-value" 
+                      class="form-control"
+                      required
+                      #capacity="ngModel"
+                      name="capacity"
+                      [ngModel]="currentCategory.capacity"
+                    >
+                    <span 
+                      class="form-help-text"
+                      *ngIf="capacity.invalid && capacity.touched"
+                    >
+                      Ошибка ограничения
+                    </span>
+                    <span 
+                      class="form-help-text"
+                      *ngIf="capacity.valid && capacity.touched"
+                    >
+                      Ограничение подошло
+                    </span>
+                </div>
+                <button type="submit" class="btn btn-primary"
+                    [disabled]="f.invalid"
+                >Редактировать</button>
+            </form>
         </div>
     </div>
-    <div class="card-block">
-        <form>
-            <div class="form-group has-error">
-                <label class="control-label" for="category-name">Введите название</label>
-                <input type="text" id="category-name" class="form-control">
-                <span class="form-help-text">Валидация ошибка</span>
-            </div>
-            <div class="form-group has-success">
-                <label class="control-label" for="category-value">Введите лимит</label>
-                <input type="number" value="0" id="category-value" class="form-control">
-                <span class="form-help-text">Валидация нет ошибки</span>
-            </div>
-            <button type="submit" class="btn btn-primary">Добавить</button>
-        </form>
-    </div>
-</div>
