@@ -42,11 +42,13 @@ export class BillPageComponent implements OnInit, OnDestroy {
   onRefresh() {
 
     this.isLoaded = false;
-    this.sub2 = this.billService.getCurrency()
-      .subscribe((currency: any) => {
-        this.currency = currency;
-        this.isLoaded = true;
-      });
+    setTimeout(() => {
+      this.sub2 = this.billService.getCurrency()
+        .subscribe((currency: any) => {
+          this.currency = currency;
+          this.isLoaded = true;
+        });
+    }, 1000);
   }
 
 }

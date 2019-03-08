@@ -16,6 +16,10 @@ export class BillService extends BaseApi {
         return this.get('bill');
     }
 
+    updateBill(bill: Bill): Observable<Bill> {
+        return this.put('bill', bill);
+    }
+
     getCurrency(): Observable<any> {
         const alternativeUrlAPI = 'https://www.cbr-xml-daily.ru/daily_json.js';
         const API_KEY = '88d79f68f936e1ca9632c6092761fc7c';

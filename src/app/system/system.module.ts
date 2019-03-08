@@ -14,6 +14,11 @@ import { CurrencyCardComponent } from './bill-page/currency-card/currency-card.c
 import { BillCardComponent } from './bill-page/bill-card/bill-card.component';
 import { BillService } from './shared/services/bill.service';
 import { CustomDatePipe } from './shared/pipes/date.pipe';
+import { AddCategoryComponent } from './records-page/add-category/add-category.component';
+import { EditCategoryComponent } from './records-page/edit-category/edit-category.component';
+import { AddEventComponent } from './records-page/add-event/add-event.component';
+import { CategoryService } from './shared/services/category.service';
+import { EventService } from './shared/services/event.service';
 
 @NgModule({
     imports: [CommonModule, SharedModule, SystemRoutingModule],
@@ -28,8 +33,11 @@ import { CustomDatePipe } from './shared/pipes/date.pipe';
         DropdownDirective,
         CurrencyCardComponent,
         BillCardComponent,
-        CustomDatePipe
+        CustomDatePipe,
+        AddCategoryComponent,
+        EditCategoryComponent,
+        AddEventComponent
     ],
-    providers: [BillService]
+    providers: [BillService, CategoryService, EventService]
 })
 export class SystemModule { }
