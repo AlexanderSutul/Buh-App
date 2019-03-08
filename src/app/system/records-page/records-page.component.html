@@ -16,12 +16,12 @@
             ></app-add-event>
         </div>
         <div class="col-md-6">
-            <app-add-category (onCategoryAdd)="newCategoryAdded($event)"></app-add-category>
+            <app-add-category (newCategoryAdd)="newCategoryAdded($event)"></app-add-category>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <app-edit-category [categories]="categories" (oldCategoriesEdit)="categoryWasEdited($event)"></app-edit-category>
+            <app-edit-category [categories]="categories" (oldCategoryEdit)="categoryWasEdited($event)"></app-edit-category>
         </div>
     </div>
 </section>
