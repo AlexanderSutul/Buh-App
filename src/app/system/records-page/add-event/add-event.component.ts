@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Category } from '../../shared/models/category.model';
 import { NgForm } from '@angular/forms';
 import { AppEvent } from '../../shared/models/event.model';
@@ -10,13 +10,17 @@ import { EventService } from '../../shared/services/event.service';
 import { BillService } from '../../shared/services/bill.service';
 import { Bill } from '../../shared/models/bill.model';
 import { Message } from 'src/app/shared/models/message.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-event',
   templateUrl: './add-event.component.html',
   styleUrls: ['./add-event.component.scss']
 })
-export class AddEventComponent implements OnInit {
+export class AddEventComponent implements OnInit, OnDestroy {
+
+  sub1: Subscription;
+  sub2: Subscription;
 
   @Input() categories: Category[] = [];
   message: Message;
@@ -60,7 +64,7 @@ export class AddEventComponent implements OnInit {
     const customEvent = new AppEvent(type, amount, category, date, description);
     console.log('event', customEvent);
 
-    this.billService.getBill()
+    this.sub1 = this.billService.getBill()
       .subscribe((bill: Bill) => {
         let value = 0;
         if (type === 'outcome') {
@@ -76,7 +80,7 @@ export class AddEventComponent implements OnInit {
           value = bill.value + amount;
         }
 
-        this.billService.updateBill({
+        this.sub2 = this.billService.updateBill({
           value,
           currency: bill.currency
         })
@@ -92,9 +96,10 @@ export class AddEventComponent implements OnInit {
             });
           });
       });
-    // this.eventService.addEvent(customEvent)
-    //   .subscribe((event: AppEvent) => {
-    //     // this.c
-    //   });
+  }
+
+  ngOnDestroy() {
+    if (this.sub1) { this.sub1.unsubscribe(); }
+    if (this.sub2) { this.sub2.unsubscribe(); }
   }
 }
