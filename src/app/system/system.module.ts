@@ -24,6 +24,7 @@ import { HistoryEventsComponent } from './history-page/history-events/history-ev
 import { HistoryDetailComponent } from './history-page/history-detail/history-detail.component';
 import { HistoryFilterComponent } from './history-page/history-filter/history-filter.component';
 import { FilterPipe } from './shared/pipes/filter.pipe';
+import { LoaderComponent } from '../shared/components/loader/loader.component';
 
 @NgModule({
     imports: [CommonModule, SharedModule, SystemRoutingModule],
@@ -46,7 +47,8 @@ import { FilterPipe } from './shared/pipes/filter.pipe';
         HistoryEventsComponent,
         HistoryDetailComponent,
         HistoryFilterComponent,
-        FilterPipe
+        FilterPipe,
+        LoaderComponent
     ],
     providers: [BillService, CategoryService, EventService]
 })
