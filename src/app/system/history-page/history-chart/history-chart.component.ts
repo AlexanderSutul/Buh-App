@@ -17,12 +17,12 @@ export class HistoryChartComponent implements OnInit {
 
   @Input() data = [
     {
-      "name": "Germany",
-      "value": 8940000
+      name: 'Germany',
+      value: 8940000
     },
     {
-      "name": "USA",
-      "value": 5000000
+      name: 'USA',
+      value: 5000000
     }
   ];
 

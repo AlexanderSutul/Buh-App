@@ -62,7 +62,7 @@ export class HistoryFilterComponent implements OnInit {
 
   private calculateInputParams(field: string, checked: boolean, value: string) {
     if (checked) {
-      !this[field].includes(value) ? this[field].push(value) : null;
+      if (!this[field].includes(value)) { this[field].push(value); }
     } else {
       this[field] = this[field].filter(item => item !== value);
     }
